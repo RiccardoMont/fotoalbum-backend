@@ -38,6 +38,26 @@
         <div class="text-danger">{{$message}}</div>
         @enderror
     </div>
+    <div class="mb-3">
+        <div class="label">
+            <label class="form-label fs-5 fw-bold">Categories</label>
+        </div>
+        <div class="d-flex flex-wrap">
+            @foreach ($categories as $category)
+            <div class="form-check col-3">
+                @if($errors->any())
+                <input class="form-check-input border-3 border-secondary" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, old('categories', []))  ? 'checked' : '' }} />
+                @else
+                <input class="form-check-input border-3 border-secondary" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ $photo->categories->contains($category) ? 'checked' : '' }} />
+                @endif
+                <label class="form-check-label" for="category-{{$category->id}}">{{$category->title}}</label>
+            </div>
+            @endforeach
+        </div>
+        @error('categories')
+        <div class="text-danger">{{$message}}</div>
+        @enderror
+    </div>
 
     <button class="btn btn-primary my-4" type="submit">Update</button>
 

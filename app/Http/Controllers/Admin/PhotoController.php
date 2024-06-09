@@ -6,6 +6,7 @@ use App\Models\Photo;
 use App\Http\Requests\StorePhotoRequest;
 use App\Http\Requests\UpdatePhotoRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -21,7 +22,6 @@ class PhotoController extends Controller
         $photos = Photo::orderByDesc('id')->get();
 
         return view('admin.photos.index', compact('photos'));
-
     }
 
     /**
@@ -29,9 +29,10 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.photos.create');
 
+        $categories = Category::all();
+
+        return view('admin.photos.create', compact('categories'));
     }
 
     /**
@@ -42,13 +43,17 @@ class PhotoController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
 
-        if($request->has('image')){
+        if ($request->has('image')) {
 
             $validated['image'] = Storage::put('uploads', $request->image);
-
         }
 
+
         $photo = Photo::create($validated);
+
+        if ($request->has('categories')) {
+            $photo->categories()->attach($validated['categories']);
+        }
 
         return to_route('admin.photos.index')->with('message', 'New Photo uploaded successfully');
     }
@@ -58,7 +63,7 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
-        
+
         return view('admin.photos.show', compact('photo'));
     }
 
@@ -67,9 +72,10 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        
 
-        return view('admin.photos.edit', compact('photo'));
+        $categories = Category::all();
+
+        return view('admin.photos.edit', compact('photo', 'categories'));
     }
 
     /**
@@ -77,24 +83,26 @@ class PhotoController extends Controller
      */
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
-        
+
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
 
-        if($request->has('image')) {
+        if ($request->has('image')) {
 
-            if($photo->image) {
+            if ($photo->image) {
 
                 Storage::delete($photo->image);
-
             }
 
             $validated['image'] = Storage::put('uploads', $request->image);
-
         }
 
 
         $photo->update($validated);
+
+        if ($request->has('categories')) {
+            $photo->categories()->sync($validated['categories']);
+        }
 
         return to_route('admin.photos.index')->with('message', 'Edited successfully');
     }
@@ -104,11 +112,10 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        
+
         if ($photo->image && !Str::startsWith($photo->image, 'https://')) {
 
             Storage::delete($photo->image);
-
         }
 
         $photo->delete();
