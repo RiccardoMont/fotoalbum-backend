@@ -20,14 +20,6 @@ class CategoryController extends Controller
 
     }
 
-    public function create()
-    {
-        $categories = Category::all();
-
-        return view('admin.categories.create', compact('categories'));
-    }
-
-
     /**
      * Store a newly created resource in storage.
      */
@@ -39,15 +31,6 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return to_route('admin.categories.index');
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
     }
 
     /**
