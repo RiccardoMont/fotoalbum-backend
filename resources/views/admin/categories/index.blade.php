@@ -4,6 +4,7 @@
 
 
 <h1>category index</h1>
+@include('partials.session-message')
 <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#AddCategory">Add category</button>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="AddCategory" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">

@@ -29,6 +29,8 @@ class BestShootController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->name, '-');
 
+        $validated['user_id'] = auth()->id();
+
         BestShoot::create($validated);
 
         return to_route('admin.best-shoots.index');
@@ -39,6 +41,11 @@ class BestShootController extends Controller
      */
     public function update(UpdateBestShootRequest $request, BestShoot $bestShoot)
     {
+
+        if(auth()->id() != $bestShoot->user_id){
+            abort(403, 'Access denied');
+        }
+
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->name, '-');
 
@@ -52,6 +59,10 @@ class BestShootController extends Controller
      */
     public function destroy(BestShoot $bestShoot)
     {
+        if(auth()->id() != $bestShoot->user_id){
+            abort(403, 'Access denied');
+        }
+
         $bestShoot->delete();
 
         return to_route('admin.best-shoots.index')->with('message', 'Category deleted!');

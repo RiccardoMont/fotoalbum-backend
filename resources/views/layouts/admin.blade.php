@@ -46,6 +46,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.categories.index') }}">{{ __('Categories') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.best-shoots.index') }}">{{ __('Best Shoots Tags') }}</a>
+                        </li>
             
                     </ul>
 

@@ -4,6 +4,7 @@
 
 
 <h1> section show {{$photo->id}}, {{$photo->title}}</h1>
+@include('partials.session-message')
 <p>{{$photo->slug}}</p>
 <div class="w-50">
     @if (Str::startsWith($photo->image, 'https://'))

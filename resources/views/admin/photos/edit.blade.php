@@ -4,6 +4,7 @@
 
 <h1>Section Edit</h1>
 @include('partials.errors')
+@include('partials.session-message')
 
 <form action="{{route('admin.photos.update', $photo)}}" method="post" enctype="multipart/form-data">
     @csrf

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateBestShootRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class UpdateBestShootRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:best_shoots,title'
+            'title' => ['required', Rule::unique('best_shoots')->ignore($this->bestShoot->id)]
         ];
     }
 }

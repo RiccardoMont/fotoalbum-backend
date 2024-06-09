@@ -6,6 +6,7 @@ use App\Models\Photo;
 use App\Http\Requests\StorePhotoRequest;
 use App\Http\Requests\UpdatePhotoRequest;
 use App\Http\Controllers\Controller;
+use App\Models\BestShoot;
 use App\Models\Category;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
@@ -31,8 +32,9 @@ class PhotoController extends Controller
     {
 
         $categories = Category::all();
+        $bestShoots = BestShoot::all();
 
-        return view('admin.photos.create', compact('categories'));
+        return view('admin.photos.create', compact('categories', 'bestShoots'));
     }
 
     /**
@@ -40,6 +42,7 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
+
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
 
@@ -48,6 +51,7 @@ class PhotoController extends Controller
             $validated['image'] = Storage::put('uploads', $request->image);
         }
 
+        $validated['user_id'] = auth()->id();
 
         $photo = Photo::create($validated);
 
@@ -72,10 +76,12 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-
+        if(auth()->id() != $photo->user_id){
+            abort(403, 'Access denied');
+        }
         $categories = Category::all();
-
         return view('admin.photos.edit', compact('photo', 'categories'));
+       
     }
 
     /**
@@ -83,6 +89,9 @@ class PhotoController extends Controller
      */
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
+        if(auth()->id() != $photo->user_id){
+            abort(403, 'Access denied');
+        }
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
@@ -112,6 +121,10 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
+
+        if(auth()->id() != $photo->user_id){
+            abort(403, 'Access denied');
+        }
 
         if ($photo->image && !Str::startsWith($photo->image, 'https://')) {
 

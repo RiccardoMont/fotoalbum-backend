@@ -4,7 +4,7 @@
 
 <h1>Sezione best-shoots</h1>
 
-
+@include('partials.session-message')
 
 
 <div class="d-flex flex-wrap my-4">

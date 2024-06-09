@@ -28,6 +28,8 @@ class CategoryController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
 
+        $validated['user_id'] = auth()->id();
+
         Category::create($validated);
 
         return to_route('admin.categories.index');
@@ -38,6 +40,10 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        if(auth()->id() != $category->user_id){
+            abort(403, 'Access denied');
+        }
+
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
 
@@ -51,6 +57,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if(auth()->id() != $category->user_id){
+            abort(403, 'Access denied');
+        }
+
         $category->delete();
 
         return to_route('admin.categories.index')->with('message', 'Category deleted succesfully');

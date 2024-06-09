@@ -4,6 +4,7 @@
 
 <h1>Section Create</h1>
 @include('partials.errors')
+@include('partials.session-message')
 
 <form action="{{route('admin.photos.store')}}" method="post" enctype="multipart/form-data">
     @csrf

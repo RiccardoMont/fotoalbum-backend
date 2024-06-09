@@ -5,7 +5,7 @@
 <div class="ms-2">
     <h1 class=>Your Photos</h1>
 </div>
-
+@include('partials.session-message')
 <div class="row mx-n4">
 
     @forelse($photos as $photo)
