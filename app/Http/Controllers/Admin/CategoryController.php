@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /**
@@ -14,32 +14,33 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.categories.index', compact('categories'));
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = Category::all();
+
+        return view('admin.categories.create', compact('categories'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['slug'] = Str::slug($request->title, '-');
+
+        Category::create($validated);
+
+        return to_route('admin.categories.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -54,7 +55,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+        $validated['slug'] = Str::slug($request->title, '-');
+
+        $category->update($validated);
+
+        return to_route('admin.categories.index')->with('message', 'Category edited succesfully');
     }
 
     /**
@@ -62,6 +68,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return to_route('admin.categories.index')->with('message', 'Category deleted succesfully');
     }
 }

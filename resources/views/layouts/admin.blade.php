@@ -43,6 +43,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.photos.index') }}">{{ __('Photos') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.categories.index') }}">{{ __('Categories') }}</a>
+                        </li>
             
                     </ul>
 
