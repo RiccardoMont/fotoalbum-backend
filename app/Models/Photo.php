@@ -11,7 +11,7 @@ class Photo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'image', 'description', 'slug', 'best_shoot_id'];
+    protected $fillable = ['title', 'image', 'description', 'slug', 'best_shoot_id', 'user_id'];
 
     public function categories() : BelongsToMany
     {
@@ -24,6 +24,13 @@ class Photo extends Model
     {
 
         return $this->belongsTo(BestShoot::class);
+
+    }
+
+    public function user() : BelongsTo
+    {
+
+        return $this->belongsTo(User::class);
 
     }
 
