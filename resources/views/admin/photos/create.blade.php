@@ -47,6 +47,15 @@
         <div class="text-danger">{{$message}}</div>
         @enderror
     </div>
+    <div class="mb-3">
+        <label for="best_shoot_id" class="form-label fs-5 fw-bold">Best Shoots Tag</label>
+        <select class="form-select" name="best_shoot_id" id="best_shoot_id">
+            <option value="">Select one</option>
+            @foreach ($best_shoots as $best_shoot)
+            <option value="{{$best_shoot->id}}" {{$best_shoot->id == old('best_shoot_id') ? 'selected' : ''}}>{{$best_shoot->title}}</option>
+            @endforeach
+        </select>
+    </div>
 
     <button class="btn btn-primary my-4" type="submit">Create</button>
 

@@ -21,6 +21,7 @@ class PhotoController extends Controller
     {
 
         $photos = Photo::orderByDesc('id')->get();
+        
 
         return view('admin.photos.index', compact('photos'));
     }
@@ -32,9 +33,9 @@ class PhotoController extends Controller
     {
 
         $categories = Category::all();
-        $bestShoots = BestShoot::all();
+        $best_shoots = BestShoot::all();
 
-        return view('admin.photos.create', compact('categories', 'bestShoots'));
+        return view('admin.photos.create', compact('categories', 'best_shoots'));
     }
 
     /**
@@ -42,6 +43,9 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
+        //dd($request->all());
+
+        
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
@@ -59,7 +63,7 @@ class PhotoController extends Controller
             $photo->categories()->attach($validated['categories']);
         }
 
-        return to_route('admin.photos.index')->with('message', 'New Photo uploaded successfully');
+        return to_route('admin.photos.index')->with('message', 'New Photo uploaded successfully!');
     }
 
     /**
@@ -80,7 +84,9 @@ class PhotoController extends Controller
             abort(403, 'Access denied');
         }
         $categories = Category::all();
-        return view('admin.photos.edit', compact('photo', 'categories'));
+        $best_shoots = BestShoot::all();
+
+        return view('admin.photos.edit', compact('photo', 'categories', 'best_shoots'));
        
     }
 
@@ -113,7 +119,7 @@ class PhotoController extends Controller
             $photo->categories()->sync($validated['categories']);
         }
 
-        return to_route('admin.photos.index')->with('message', 'Edited successfully');
+        return to_route('admin.photos.index')->with('message', 'Photo edited successfully!');
     }
 
     /**
@@ -133,6 +139,6 @@ class PhotoController extends Controller
 
         $photo->delete();
 
-        return to_route('admin.photos.index')->with('Photo deleted successfully');
+        return to_route('admin.photos.index')->with('Photo deleted successfully!');
     }
 }

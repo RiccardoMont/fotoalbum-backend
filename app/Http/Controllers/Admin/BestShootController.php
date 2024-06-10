@@ -33,7 +33,7 @@ class BestShootController extends Controller
 
         BestShoot::create($validated);
 
-        return to_route('admin.best-shoots.index');
+        return to_route('admin.best-shoots.index')->with('message', 'New Best Shoots Tag created!');
     }
 
     /**
@@ -51,7 +51,7 @@ class BestShootController extends Controller
 
         $bestShoot->update($validated);
 
-        return to_route('admin.best-shoots.index')->with('message', 'Categories updated succesfully');
+        return to_route('admin.best-shoots.index')->with('message', 'Best shoots Tag edited!');
     }
 
     /**
@@ -65,6 +65,6 @@ class BestShootController extends Controller
 
         $bestShoot->delete();
 
-        return to_route('admin.best-shoots.index')->with('message', 'Category deleted!');
+        return to_route('admin.best-shoots.index')->with('message', 'Best shoots Tag deleted!');
     }
 }

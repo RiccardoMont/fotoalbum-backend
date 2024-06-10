@@ -11,7 +11,7 @@ class BestShoot extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug'];
+    protected $fillable = ['title', 'slug', 'user_id'];
 
     public function photos() : HasMany 
     {

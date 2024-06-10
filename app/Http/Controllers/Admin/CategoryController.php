@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
         Category::create($validated);
 
-        return to_route('admin.categories.index');
+        return to_route('admin.categories.index')->with('message', 'New Category created!');
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return to_route('admin.categories.index')->with('message', 'Category edited succesfully');
+        return to_route('admin.categories.index')->with('message', 'Category edited!');
     }
 
     /**
@@ -63,6 +63,6 @@ class CategoryController extends Controller
 
         $category->delete();
 
-        return to_route('admin.categories.index')->with('message', 'Category deleted succesfully');
+        return to_route('admin.categories.index')->with('message', 'Category deleted!');
     }
 }
