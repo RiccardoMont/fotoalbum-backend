@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-secondary">
+        <h2>
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-muted">
+        <p class="mt-1">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
