@@ -1,7 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: "Kanit", sans-serif;
+    font-family: "Alef", sans-serif;
 }
 
 :root {
