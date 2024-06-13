@@ -24,7 +24,7 @@ class StorePhotoRequest extends FormRequest
         return [
             
             'title' => 'required',
-            'image' => 'required|image|max:1000',
+            'image' => 'required|image|max:2048',
             'description' => 'nullable',
             'categories' => 'exists:categories,id',
             'best_shoot_id' => 'exists:best_shoots,id|nullable'

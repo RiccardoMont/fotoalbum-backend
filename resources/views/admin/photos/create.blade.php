@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label fs-5 fw-bold">Photo</label>
-            <input type="file" class="form-control input-file" name="image" id="image" placeholder="image" aria-describedby="coverImageHelper">
+            <input type="file" class="form-control" name="image" id="image" placeholder="image" aria-describedby="coverImageHelper">
             @error('image')
             <div class="text-danger">{{$message}}</div>
             @enderror

@@ -11,6 +11,8 @@ use App\Models\Category;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PhotoController extends Controller
 {
@@ -43,9 +45,6 @@ class PhotoController extends Controller
      */
     public function store(StorePhotoRequest $request)
     {
-        //dd($request->all());
-
-
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
@@ -66,7 +65,18 @@ class PhotoController extends Controller
 
         if ($request->has('image')) {
 
-            $validated['image'] = Storage::put('uploads', $request->image);
+            $manager = new ImageManager(new Driver());
+           
+            $name_gen = hexdec(uniqid()). '.' . 'jpeg';
+           
+            $img = $manager->read($request->file('image')->getRealPath());
+            
+            $destination = storage_path('app/public/uploads');
+
+            $img->toJpeg()->save($destination . '/' . $name_gen);
+            
+            $validated['image'] = 'uploads/' . $name_gen;
+            
         }
 
 
@@ -110,10 +120,6 @@ class PhotoController extends Controller
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
 
-
-
-
-
         if (auth()->id() != $photo->user_id) {
             abort(403, 'Access denied');
         }
@@ -136,13 +142,25 @@ class PhotoController extends Controller
         }
 
         if ($request->has('image')) {
-
+           
             if ($photo->image) {
 
                 Storage::delete($photo->image);
             }
 
-            $validated['image'] = Storage::put('uploads', $request->image);
+            $manager = new ImageManager(new Driver());
+           
+            $name_gen = hexdec(uniqid()). '.' . 'jpeg';
+           
+            $img = $manager->read($request->file('image')->getRealPath());
+            
+            $destination = storage_path('app/public/uploads');
+
+            $img->toJpeg()->save($destination . '/' . $name_gen);
+            
+            $validated['image'] = 'uploads/' . $name_gen;
+
+            //$validated['image'] = Storage::put('uploads', $request->image);
         }
 
 

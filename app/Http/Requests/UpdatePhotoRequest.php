@@ -24,7 +24,7 @@ class UpdatePhotoRequest extends FormRequest
         return [
 
             'title' => 'required',
-            'image' => 'image|max:1000',
+            'image' => 'image|max:2048',
             'description' => 'nullable',
             'categories' => 'exists:categories,id',
             'best_shoot_id' => 'exists:best_shoots,id|nullable'
