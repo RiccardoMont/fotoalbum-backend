@@ -14,7 +14,7 @@
 
         <div class="mb-3">
             <label for="title" class="form-label fs-5 fw-bold">Title</label>
-            <input type="text" class="form-control border-3 border-dark-subtle" name="title" id="title" value="{{old('title', $photo->title)}}">
+            <input type="text" class="form-control" name="title" id="title" value="{{old('title', $photo->title)}}">
             @error('title')
             <div class="text-danger">{{$message}}</div>
             @enderror
@@ -27,7 +27,7 @@
             @endif
             <div class="mb-3">
                 <label for="image" class="form-label fs-5 fw-bold">Photo</label>
-                <input type="file" class="form-control border-3 border-dark-subtle" name="image" id="image" placeholder="image" aria-describedby="coverImageHelper">
+                <input type="file" class="form-control" name="image" id="image" placeholder="image" aria-describedby="coverImageHelper">
                 <div id="coverImageHelper" class="form-text">Upload a photo</div>
                 @error('image')
                 <div class="text-danger">{{$message}}</div>
@@ -36,7 +36,7 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label fs-5 fw-bold">Description</label>
-            <textarea type="text" class="form-control border-3 border-dark-subtle" name="description" id="description" rows="6" cols="100">{{old('description', $photo->description)}}</textarea>
+            <textarea type="text" class="form-control" name="description" id="description" rows="6" cols="100">{{old('description', $photo->description)}}</textarea>
             @error('description')
             <div class="text-danger">{{$message}}</div>
             @enderror
@@ -49,9 +49,9 @@
                 @foreach ($categories as $category)
                 <div class="form-check col-3">
                     @if($errors->any())
-                    <input class="form-check-input border-3 border-secondary" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, old('categories', []))  ? 'checked' : '' }} />
+                    <input class="form-check-input border-2" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, old('categories', []))  ? 'checked' : '' }} />
                     @else
-                    <input class="form-check-input border-3 border-secondary" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ $photo->categories->contains($category) ? 'checked' : '' }} />
+                    <input class="form-check-input border-2" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ $photo->categories->contains($category) ? 'checked' : '' }} />
                     @endif
                     <label class="form-check-label" for="category-{{$category->id}}">{{$category->title}}</label>
                 </div>

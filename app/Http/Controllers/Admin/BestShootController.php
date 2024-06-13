@@ -6,6 +6,7 @@ use App\Models\BestShoot;
 use App\Http\Requests\StoreBestShootRequest;
 use App\Http\Requests\UpdateBestShootRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Photo;
 use Illuminate\Support\Str;
 
 class BestShootController extends Controller
@@ -15,6 +16,7 @@ class BestShootController extends Controller
      */
     public function index()
     {
+
         $best_shoots = BestShoot::all();
 
         return view('admin.best-shoots.index', compact('best_shoots'));
@@ -26,6 +28,7 @@ class BestShootController extends Controller
      */
     public function store(StoreBestShootRequest $request)
     {
+
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->name, '-');
 
@@ -43,7 +46,7 @@ class BestShootController extends Controller
     {
 
         if(auth()->id() != $bestShoot->user_id){
-            abort(403, 'Access denied');
+            return to_route('admin.best-shoots.index')->with('message', 'Default Best shoots Tag cannot be edited.')->with('value', 'alert-danger');
         }
 
         $validated = $request->validated();
@@ -60,7 +63,7 @@ class BestShootController extends Controller
     public function destroy(BestShoot $bestShoot)
     {
         if(auth()->id() != $bestShoot->user_id){
-            abort(403, 'Access denied');
+            return to_route('admin.best-shoots.index')->with('message', 'Default Best shoots Tag cannot be deleted.')->with('value', 'alert-danger');
         }
 
         $bestShoot->delete();

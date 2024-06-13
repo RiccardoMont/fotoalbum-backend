@@ -21,7 +21,7 @@ class PhotoController extends Controller
     {
 
         $photos = Photo::orderByDesc('id')->get();
-        
+
 
         return view('admin.photos.index', compact('photos'));
     }
@@ -45,15 +45,30 @@ class PhotoController extends Controller
     {
         //dd($request->all());
 
-        
+
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
+
+        //Unique "weekly shoot" and "monthly shoot"
+        if ($validated['best_shoot_id'] == 2 || $validated['best_shoot_id'] == 3) {
+
+            $photo_retag = Photo::where('best_shoot_id', '=', $validated['best_shoot_id'])
+                ->where('title', '!=', $validated['title'])
+                ->first();
+
+            if ($photo_retag) {
+                $photo_retag->best_shoot_id = null;
+                $photo_retag->update();
+            }
+
+        }
 
         if ($request->has('image')) {
 
             $validated['image'] = Storage::put('uploads', $request->image);
         }
+
 
         $validated['user_id'] = auth()->id();
 
@@ -80,14 +95,13 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        if(auth()->id() != $photo->user_id){
+        if (auth()->id() != $photo->user_id) {
             abort(403, 'Access denied');
         }
         $categories = Category::all();
         $best_shoots = BestShoot::all();
 
         return view('admin.photos.edit', compact('photo', 'categories', 'best_shoots'));
-       
     }
 
     /**
@@ -95,12 +109,31 @@ class PhotoController extends Controller
      */
     public function update(UpdatePhotoRequest $request, Photo $photo)
     {
-        if(auth()->id() != $photo->user_id){
+
+
+
+
+
+        if (auth()->id() != $photo->user_id) {
             abort(403, 'Access denied');
         }
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($request->title, '-');
+
+        //Unique "weekly shoot" and "monthly shoot"
+        if ($validated['best_shoot_id'] == 2 || $validated['best_shoot_id'] == 3) {
+
+            $photo_retag = Photo::where('best_shoot_id', '=', $validated['best_shoot_id'])
+                ->where('title', '!=', $validated['title'])
+                ->first();
+
+            if ($photo_retag) {
+                $photo_retag->best_shoot_id = null;
+                $photo_retag->update();
+            }
+
+        }
 
         if ($request->has('image')) {
 
@@ -128,7 +161,7 @@ class PhotoController extends Controller
     public function destroy(Photo $photo)
     {
 
-        if(auth()->id() != $photo->user_id){
+        if (auth()->id() != $photo->user_id) {
             abort(403, 'Access denied');
         }
 

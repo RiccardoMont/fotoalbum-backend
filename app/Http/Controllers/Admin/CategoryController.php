@@ -41,7 +41,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         if(auth()->id() != $category->user_id){
-            abort(403, 'Access denied');
+            return to_route('admin.categories.index')->with('message', 'Default Category cannot be edited.')->with('value', 'alert-danger');
         }
 
         $validated = $request->validated();
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if(auth()->id() != $category->user_id){
-            abort(403, 'Access denied');
+            return to_route('admin.categories.index')->with('message', 'Default Category cannot be deleted.')->with('value', 'alert-danger');
         }
 
         $category->delete();

@@ -25,6 +25,14 @@ body {
 
 }
 
+.row>*{
+    padding: 0;
+}
+
+.row{
+    margin-left: 0;
+}
+
 //TITLE
 .title{
     min-height: 15vh;
@@ -60,15 +68,48 @@ input:focus {
     background-color: var(--bg-very-softblue) !important;
     color: var(--text-white) !important;
     border-color: var(--bg-very-softblue) !important ;
-    box-shadow: 0 0 0 0.25rem var(--button-hover-purple) !important;
+    box-shadow: 0 0 0 0.15rem var(--button-hover-purple) !important;
     
 }
 
+.form-check-input:checked{
+    background-color: var(--button-hover-purple) !important;
+    border-color: var(--button-mag) !important;
+    box-shadow: none !important;
+}
+
+//TEXTAREA
+textarea {
+    background-color: var(--bg-very-softblue) !important;
+    border-color: var(--bg-very-softblue) !important;
+    color: var(--text-white) !important;
+}
+
+textarea:focus {
+    background-color: var(--bg-very-softblue) !important;
+    color: var(--text-white) !important;
+    border-color: var(--bg-very-softblue) !important ;
+    box-shadow: 0 0 0 0.15rem var(--button-hover-purple) !important;
+}
+
+//SELECT
+select {
+    background-color: var(--bg-very-softblue) !important;
+    color: var(--text-white) !important;
+    border-color: var(--bg-very-softblue) !important ;
+    box-shadow: 0 0 0 0.1rem var(--button-hover-purple) !important;
+}
+
+select:focus{
+    box-shadow: none !important;
+    background-color: var(--button-hover-purple) !important; 
+}
 
 //AUTH CARDS
 .card {
     background-color: var(--bg-softblue);
     color: var(--text-white);
+    /*height: 400px;*/
 
     
 
