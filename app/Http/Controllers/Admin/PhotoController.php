@@ -23,9 +23,10 @@ class PhotoController extends Controller
     {
 
         $photos = Photo::orderByDesc('id')->get();
+        $categories = Category::all();
 
 
-        return view('admin.photos.index', compact('photos'));
+        return view('admin.photos.index', compact('photos', 'categories'));
     }
 
     /**

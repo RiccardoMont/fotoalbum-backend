@@ -9,24 +9,37 @@
 </div>
 <div class="container">
     @include('partials.session-message')
-    <div class="row mx-n4">
+
+    <div class="d-flex flex-no-wrap overflow-x-auto gap-2">
+        @forelse($categories as $cat)
+        <div class="category-button"><span class="badge">{{$cat->title}}</span></div>
+        @empty
+        <p>no results</p>
+        @endforelse
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="card px-0 m-4 w-29 d-flex justify-content-center align-items-center card-add-image">
+            <a href="{{route('admin.photos.create')}}">
+                <i class="fa-solid fa-circle-plus fa-6x"></i>
+            </a>
+        </div>
 
         @forelse($photos as $photo)
-
-        <div class="card px-0 m-4 col-3  d-flex justify-content-end">
-            <div class="overflow-hidden card-img-top position-relative">
+        <div class="card px-0 m-4 w-29  d-flex justify-content-end">
+            <a href="{{route('admin.photos.show', $photo)}}" class="overflow-hidden card-img-top position-relative">
                 @if (Str::startsWith($photo->image, 'https://'))
                 <img src="https://picsum.photos/seed/picsum/300/200" class="w-100 position-absolute bottom-0" alt="">
                 @else
                 <img src="{{asset('storage/' . $photo->image)}}" class="w-100 position-absolute bottom-0" alt="">
                 @endif
-            </div>
+            </a>
             <!--<div class="card-body">-->
             <div class="d-flex justify-content-between align-items-center prov">
-                <div class="title">
-                    <span class="card-title">{{$photo->title}}</span>
+                <div class="title mx-2">
+                    <span>{{$photo->title}}</span>
                 </div>
-                <div class="actions mx-n2">
+                <div class="actions mx-2">
                     <a href="{{route('admin.photos.show', $photo)}}"><i class="fa-solid fa-mountain-sun mx-2"></i></a>
                     <a href="{{route('admin.photos.edit', $photo)}}"><i class="fa-solid fa-marker mx-2"></i></a>
                     <i class="fa-solid fa-trash mx-2" data-bs-toggle="modal" data-bs-target="#{{$photo->id}}"></i>
@@ -41,17 +54,16 @@
                                     Are you sure you want to delete this photo permanently?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                                    <button type="button" class="btn" data-bs-dismiss="modal">Back</button>
                                     <form action="{{route('admin.photos.destroy', $photo)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn delete-btn">Delete</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!--</div>-->
@@ -67,15 +79,40 @@
 @endsection
 
 <style type="text/css">
-    .card-img-top {
+
+.category-button{
+    width: 22,5%;
+
+    & .badge {
+        background-color: var(--button-purple);
+    }
+}
+.card-img-top {
         /*height: 80%;*/
         height: 320px;
         background-color: var(--bg-blue) !important;
+
+        & img {
+            cursor: pointer;
+        }
     }
 
-.prov{
-    height: 80px;
-}
+    .modal-content {
+        background-color: var(--bg-softblue) !important;
+
+        & .delete-btn {
+            background-color: var(--button-delete) !important;
+        }
+
+        & .delete-btn:hover {
+            opacity: 0.6;
+        }
+    }
+
+    .prov {
+        height: 80px;
+    }
+
     .card-body {
         width: 100%;
         transition: 0.5s;
@@ -85,16 +122,5 @@
 
         width: 100%;
 
-    }
-
-    a {
-        text-decoration: none;
-
-
-    }
-
-    .fa-trash:hover {
-        cursor: pointer;
-        color: red;
     }
 </style>

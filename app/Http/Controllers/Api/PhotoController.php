@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Photo;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,8 @@ class PhotoController extends Controller
                 'success' => true,
                 'results' => Photo::with(['categories', 'user', 'bestShoot'])->orderByDesc('id')->where('title', 'LIKE', '%' . $request->search . '%')->get()
             ]);
+            
         }
-
 
         return response()->json([
             'success' => true,

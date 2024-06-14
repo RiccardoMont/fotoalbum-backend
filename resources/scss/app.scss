@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,7 +11,7 @@ body {
 }
 
 :root {
-    --lal:#06070d;
+    --lal: #06070d;
     --lol: #161a1f;
     --lul: #29303a;
     --bg-blue: #0b041a;
@@ -22,26 +22,61 @@ body {
     --button-hover-purple: #55279f;
     --button-mag: #9f057b;
     --button-hover-mag: #c40798;
+    --button-delete: #ff0246;
+    --button-view: #3e15c5;
+    --button-edit: #8d42c2;
 
 }
 
-.row>*{
+
+.row>* {
     padding: 0;
 }
 
-.row{
+.row {
     margin-left: 0;
 }
 
-//TITLE
-.title{
-    min-height: 15vh;
-    max-height: 20vh;
-    background-color: var(--bg-softblue);
-    display: flex;
-    align-items: center;
+//SCROLLBARS
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0;
 }
 
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--button-mag);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover-mag); 
+  }
+
+//WIDTHS
+.w-29 {
+    width: 29%;
+}
+
+//TITLE
+.title {
+
+    & span {
+        font-size: 20px;
+    }
+
+}
+
+
+
+//A HREF
+
+a {
+    text-decoration: none
+}
 
 //BUTTONS
 button {
@@ -61,18 +96,18 @@ input {
     background-color: var(--bg-very-softblue) !important;
     border-color: var(--bg-very-softblue) !important;
     color: var(--text-white) !important;
-    
+
 }
 
 input:focus {
     background-color: var(--bg-very-softblue) !important;
     color: var(--text-white) !important;
-    border-color: var(--bg-very-softblue) !important ;
+    border-color: var(--bg-very-softblue) !important;
     box-shadow: 0 0 0 0.15rem var(--button-hover-purple) !important;
-    
+
 }
 
-.form-check-input:checked{
+.form-check-input:checked {
     background-color: var(--button-hover-purple) !important;
     border-color: var(--button-mag) !important;
     box-shadow: none !important;
@@ -88,7 +123,7 @@ textarea {
 textarea:focus {
     background-color: var(--bg-very-softblue) !important;
     color: var(--text-white) !important;
-    border-color: var(--bg-very-softblue) !important ;
+    border-color: var(--bg-very-softblue) !important;
     box-shadow: 0 0 0 0.15rem var(--button-hover-purple) !important;
 }
 
@@ -96,32 +131,55 @@ textarea:focus {
 select {
     background-color: var(--bg-very-softblue) !important;
     color: var(--text-white) !important;
-    border-color: var(--bg-very-softblue) !important ;
+    border-color: var(--bg-very-softblue) !important;
     box-shadow: 0 0 0 0.1rem var(--button-hover-purple) !important;
 }
 
-select:focus{
+select:focus {
     box-shadow: none !important;
-    background-color: var(--button-hover-purple) !important; 
+    background-color: var(--button-hover-purple) !important;
 }
 
-//AUTH CARDS
+//AUTH CARDS & IMAGES-CARD
 .card {
     background-color: var(--bg-softblue);
     color: var(--text-white);
     /*height: 400px;*/
 
-    
-
-    & a {
-        color: var(--button-mag);
+    & .fa-circle-plus {
+        cursor: pointer;
     }
 
-    & a:hover{
-        color: var(--text-white);
+    & .fa-circle-plus:hover {
+        opacity: 0.6;
     }
 
-    & .form-check-input:checked{
+    & .fa-mountain-sun {
+        color: var(--button-view);
+    }
+
+    & .fa-mountain-sun:hover {
+        opacity: 0.6;
+    }
+
+    & .fa-marker {
+        color: var(--button-edit);
+    }
+
+    & .fa-marker:hover {
+        opacity: 0.6;
+    }
+
+    & .fa-trash {
+        color: var(--button-delete);
+        cursor: pointer;
+    }
+
+    & .fa-trash:hover {
+        opacity: 0.6;
+    }
+
+    & .form-check-input:checked {
         background-color: var(--button-hover-purple);
         border-color: var(--button-hover-purple);
     }
