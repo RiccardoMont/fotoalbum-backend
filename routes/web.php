@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BestShootController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +30,15 @@ Route::middleware(['auth', 'verified'])
 
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('photos/categories/filter', [FilterController::class, 'category_filter'])->name('photos.categories.filter');
 
     Route::resource('photos', PhotoController::class);
 
     Route::resource('categories', CategoryController::class);
 
     Route::resource('best-shoots', BestShootController::class);
+
 
 });
 

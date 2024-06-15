@@ -22,7 +22,9 @@ class PhotoController extends Controller
     public function index()
     {
 
-        $photos = Photo::orderByDesc('id')->get();
+        //Aggiungo la session per poter ricevere i dati dal FilterController
+        $photos = session('photos', Photo::orderByDesc('id')->get());
+
         $categories = Category::all();
 
 
@@ -61,23 +63,21 @@ class PhotoController extends Controller
                 $photo_retag->best_shoot_id = null;
                 $photo_retag->update();
             }
-
         }
 
         if ($request->has('image')) {
 
             $manager = new ImageManager(new Driver());
-           
-            $name_gen = hexdec(uniqid()). '.' . 'jpeg';
-           
+
+            $name_gen = hexdec(uniqid()) . '.' . 'jpeg';
+
             $img = $manager->read($request->file('image')->getRealPath());
-            
+
             $destination = storage_path('app/public/uploads');
 
             $img->toJpeg()->save($destination . '/' . $name_gen);
-            
+
             $validated['image'] = 'uploads/' . $name_gen;
-            
         }
 
 
@@ -139,26 +139,25 @@ class PhotoController extends Controller
                 $photo_retag->best_shoot_id = null;
                 $photo_retag->update();
             }
-
         }
 
         if ($request->has('image')) {
-           
+
             if ($photo->image) {
 
                 Storage::delete($photo->image);
             }
 
             $manager = new ImageManager(new Driver());
-           
-            $name_gen = hexdec(uniqid()). '.' . 'jpeg';
-           
+
+            $name_gen = hexdec(uniqid()) . '.' . 'jpeg';
+
             $img = $manager->read($request->file('image')->getRealPath());
-            
+
             $destination = storage_path('app/public/uploads');
 
             $img->toJpeg()->save($destination . '/' . $name_gen);
-            
+
             $validated['image'] = 'uploads/' . $name_gen;
 
             //$validated['image'] = Storage::put('uploads', $request->image);

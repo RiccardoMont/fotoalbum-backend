@@ -9,22 +9,27 @@
 </div>
 <div class="container">
     @include('partials.session-message')
+    <form action="{{route('admin.photos.categories.filter')}}" method="get">
+        <div class="d-flex flex-wrap overflow-x-auto gap-2">
 
-    <div class="d-flex flex-no-wrap overflow-x-auto gap-2">
-        @forelse($categories as $cat)
-        <div class="category-button"><span class="badge">{{$cat->title}}</span></div>
-        @empty
-        <p>no results</p>
-        @endforelse
-    </div>
-
+            @forelse($categories as $category)
+            <div class="form-check col-3">
+                <input class="form-check-input border-2" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, old('categories',[]))  ? 'checked' : '' }} />
+                <label class="form-check-label" for="category-{{$category->id}}">{{$category->title}}</label>
+            </div>
+            @empty
+            <p>no results</p>
+            @endforelse
+        </div>
+        <button type="submit">Filter</button>
+    </form>
     <div class="row justify-content-center">
         <div class="card px-0 m-4 w-29 d-flex justify-content-center align-items-center card-add-image">
             <a href="{{route('admin.photos.create')}}">
                 <i class="fa-solid fa-circle-plus fa-6x"></i>
             </a>
         </div>
-
+       
         @forelse($photos as $photo)
         <div class="card px-0 m-4 w-29  d-flex justify-content-end">
             <a href="{{route('admin.photos.show', $photo)}}" class="overflow-hidden card-img-top position-relative">
@@ -79,15 +84,15 @@
 @endsection
 
 <style type="text/css">
+    .category-button {
+        width: 22, 5%;
 
-.category-button{
-    width: 22,5%;
-
-    & .badge {
-        background-color: var(--button-purple);
+        & .badge {
+            background-color: var(--button-purple);
+        }
     }
-}
-.card-img-top {
+
+    .card-img-top {
         /*height: 80%;*/
         height: 320px;
         background-color: var(--bg-blue) !important;
