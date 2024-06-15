@@ -10,9 +10,8 @@
 @include('partials.session-message')
 <div class="container">
     <div class="row gap-1">
-
         @forelse($best_shoots as $best)
-            @forelse($best->photos as $photo)
+        @forelse($best->photos as $photo)
         <div class="card">
             <div class="mask d-flex align-items-center">
                 <img src="{{asset('storage/' . $photo->image)}}" alt="">
@@ -21,9 +20,22 @@
             <h1>{{$photo->title}}</h1>
         </div>
         @empty
-        @endforelse 
+        @endforelse
         @empty
         <p>no results</p>
+        @endforelse
+    </div>
+    <div class="row gap-1">
+        @forelse($highlighted->photos as $photo)
+        <div class="card">
+            <div class="mask d-flex align-items-center">
+                <img src="{{asset('storage/' . $photo->image)}}" alt="">
+                <div class="badge">{{$highlighted->title}}</div>
+            </div>
+            <h1>{{$photo->title}}</h1>
+        </div>
+        @empty
+        <p>no res</p>
         @endforelse
     </div>
 </div>

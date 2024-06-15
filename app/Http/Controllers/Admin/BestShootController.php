@@ -16,10 +16,13 @@ class BestShootController extends Controller
      */
     public function index()
     {
+        $highlighted = BestShoot::where('slug', '=', 'highlighted')->first();
+        
+        $best_shoots = BestShoot::where('slug', '!=', 'highlighted')->get();
 
-        $best_shoots = BestShoot::all();
+        
 
-        return view('admin.best-shoots.index', compact('best_shoots'));
+        return view('admin.best-shoots.index', compact('highlighted', 'best_shoots'));
     }
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BestShootController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PhotoController;
 use Illuminate\Http\Request;
@@ -26,3 +27,5 @@ Route::get('photos/{photo}', [PhotoController::class, 'show']);
 
 Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/filter', [CategoryController::class, 'category_filter']);
+
+Route::get('bestshoots/highlighted', [BestShootController::class, 'index']);
