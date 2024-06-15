@@ -14,7 +14,8 @@
 
             @forelse($categories as $category)
             <div class="form-check col-3">
-                <input class="form-check-input border-2" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, old('categories',[]))  ? 'checked' : '' }} />
+                <!--Faccio la verifica sfruttando il parametro $checks, passato prima tramite la session e poi con il compact-->
+                <input class="form-check-input border-2" type="checkbox" value="{{$category->id}}" id="category-{{$category->id}}" name="categories[]" {{ in_array($category->id, ($checks ? $checks : []))  ? 'checked' : '' }} />
                 <label class="form-check-label" for="category-{{$category->id}}">{{$category->title}}</label>
             </div>
             @empty
@@ -29,7 +30,7 @@
                 <i class="fa-solid fa-circle-plus fa-6x"></i>
             </a>
         </div>
-       
+
         @forelse($photos as $photo)
         <div class="card px-0 m-4 w-29  d-flex justify-content-end">
             <a href="{{route('admin.photos.show', $photo)}}" class="overflow-hidden card-img-top position-relative">

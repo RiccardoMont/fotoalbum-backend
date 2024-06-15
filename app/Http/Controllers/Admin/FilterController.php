@@ -48,6 +48,10 @@ class FilterController extends Controller
 
         //Non essendo possibile passare 'photos' con compact, utilizzo la session
         session()->flash('photos', $photos);
+
+        //Utilizzo lo stesso metodo per tenere in memoria le checkbox checkate
+        $checks = $request->categories;
+        session()->flash('checks', $checks);
         //Applico il redirect direttamente sulla pagina principale
         return to_route('admin.photos.index');
     }

@@ -25,10 +25,13 @@ class PhotoController extends Controller
         //Aggiungo la session per poter ricevere i dati dal FilterController
         $photos = session('photos', Photo::orderByDesc('id')->get());
 
+        //Aggiungo la session per tenere memorizzati i checkbox dopo la ricerca 
+        $checks = session('checks', []);
+       
         $categories = Category::all();
 
 
-        return view('admin.photos.index', compact('photos', 'categories'));
+        return view('admin.photos.index', compact('photos', 'categories', 'checks'));
     }
 
     /**
