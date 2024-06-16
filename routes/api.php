@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BestShootController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\Api\LeadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,5 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/filter', [CategoryController::class, 'category_filter']);
 
 Route::get('bestshoots/highlighted', [BestShootController::class, 'index']);
+
+Route::post('contacts', [LeadController::class, 'store']);
