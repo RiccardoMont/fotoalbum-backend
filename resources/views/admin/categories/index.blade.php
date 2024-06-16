@@ -115,28 +115,7 @@
 @endsection
 
 <style type="text/css">
-    table {
-        --bs-table-bg: var(--bg-very-softblue) !important;
-        --bs-table-striped-bg: rgb(0, 0, 0, 20%) !important;
-        --bs-table-color: var(--text-white) !important;
-        --bs-table-striped-color: var(--text-white) !important;
-
-        & .fa-marker {
-            cursor: pointer;
-        }
-
-        & .fa-marker:hover {
-            color: var(--button-hover-purple);
-        }
-
-        & .fa-trash {
-            cursor: pointer;
-        }
-
-        & .fa-trash:hover {
-            color: var(--button-mag);
-        }
-    }
+    
 
     .offcanvas {
 

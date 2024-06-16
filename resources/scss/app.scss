@@ -50,11 +50,11 @@ body {
 ::-webkit-scrollbar-thumb {
     background: var(--button-mag);
     border-radius: 5px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--button-hover-mag); 
-  }
+::-webkit-scrollbar-thumb:hover {
+    background: var(--button-hover-mag);
+}
 
 //WIDTHS
 .w-29 {
@@ -70,7 +70,30 @@ body {
 
 }
 
+//TABLES
 
+table {
+    --bs-table-bg: var(--bg-very-softblue) !important;
+    --bs-table-striped-bg: rgb(0, 0, 0, 20%) !important;
+    --bs-table-color: var(--text-white) !important;
+    --bs-table-striped-color: var(--text-white) !important;
+
+    & .fa-marker {
+        cursor: pointer;
+    }
+
+    & .fa-marker:hover {
+        color: var(--button-hover-purple);
+    }
+
+    & .fa-trash {
+        cursor: pointer;
+    }
+
+    & .fa-trash:hover {
+        color: var(--button-mag);
+    }
+}
 
 //A HREF
 

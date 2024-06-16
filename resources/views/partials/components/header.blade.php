@@ -30,6 +30,7 @@
                     @else
                     <li><a href="{{ url('admin') }}">{{__('Dashboard')}}</a></li>
                     <li><a href="{{ url('profile') }}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ route('admin.leads.index')}}">{{__('Messages')}}</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
