@@ -20,6 +20,17 @@
                     @endif
                 </ul>
             </div>
+            <div class="searchbar">
+                <form action="{{route('admin.photos.title')}}" method="get">
+                    @csrf
+                    <div class="input-group">
+                        <input type="search" class="form-control" name="title" id="title" value="">
+                        <button class="btn" type="submit">
+                            <i class="fas fa-search fa-lg fa-fw"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
             <div class="user d-flex justify-content-end ms-auto">
                 <ul class="list-unstyled d-flex m-0">
                     @guest

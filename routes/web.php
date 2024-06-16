@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\SearchPhotoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'verified'])
     
     Route::get('photos/categories/filter', [FilterController::class, 'category_filter'])->name('photos.categories.filter');
 
+    Route::get('photos/title', [SearchPhotoController::class, 'search'])->name('photos.title');
+
     Route::resource('leads', LeadController::class);
 
     Route::resource('photos', PhotoController::class);
@@ -42,6 +45,8 @@ Route::middleware(['auth', 'verified'])
     Route::resource('categories', CategoryController::class);
 
     Route::resource('best-shoots', BestShootController::class);
+
+
 
 
 });

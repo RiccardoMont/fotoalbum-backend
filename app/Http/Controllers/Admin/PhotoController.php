@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {
@@ -20,7 +21,7 @@ class PhotoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {        
 
         //Aggiungo la session per poter ricevere i dati dal FilterController
         $photos = session('photos', Photo::orderByDesc('id')->get());
@@ -29,6 +30,8 @@ class PhotoController extends Controller
         $checks = session('checks', []);
        
         $categories = Category::all();
+
+
 
 
         return view('admin.photos.index', compact('photos', 'categories', 'checks'));
