@@ -19,4 +19,16 @@ class BestShootController extends Controller
         ]);
 
     }
+
+    public function bests(){
+        $bests = BestShoot::with(['photos'])->where('slug', '!=', 'highlighted')->get();
+        $photos = $bests->all();
+
+        
+        return response()->json([
+            'success' => true,
+            'results' => $photos
+        ]);
+
+    }
 }

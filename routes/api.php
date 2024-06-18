@@ -30,5 +30,6 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/filter', [CategoryController::class, 'category_filter']);
 
 Route::get('bestshoots/highlighted', [BestShootController::class, 'index']);
+Route::get('bestshoots', [BestShootController::class, 'bests']);
 
 Route::post('contacts', [LeadController::class, 'store']);
