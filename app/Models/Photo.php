@@ -11,7 +11,7 @@ class Photo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'image', 'description', 'slug', 'best_shoot_id', 'user_id'];
+    protected $fillable = ['title', 'image', 'description', 'slug', 'best_shoot_id', 'user_id', 'published'];
 
     public function categories() : BelongsToMany
     {

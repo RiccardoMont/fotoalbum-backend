@@ -27,7 +27,8 @@ class UpdatePhotoRequest extends FormRequest
             'image' => 'image|max:2048',
             'description' => 'nullable',
             'categories' => 'exists:categories,id',
-            'best_shoot_id' => 'exists:best_shoots,id|nullable'
+            'best_shoot_id' => 'exists:best_shoots,id|nullable',
+            'published' => 'required|boolean'
         ];
     }
 }

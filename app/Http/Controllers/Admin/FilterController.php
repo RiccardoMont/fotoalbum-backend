@@ -43,7 +43,7 @@ class FilterController extends Controller
         //Nel caso non vi siano categories nella request, rimetto in pagina tutte le foto
         } else {
 
-            $photos = Photo::orderByDesc('id')->get();
+            $photos = Photo::orderByDesc('id')->where('published', '=', true)->paginate(12);
         }
 
         //Non essendo possibile passare 'photos' con compact, utilizzo la session

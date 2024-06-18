@@ -61,6 +61,28 @@
                 @endforeach
             </select>
         </div>
+        <div class="mb-3">
+            <div class="label">
+                <label class="form-label fs-4 fw-bold">Ready to publish?</label>
+            </div>
+            <div class="d-flex">
+                <div class="form-check col-3">
+                    <input class="form-check-input" type="radio" name="published" id="published_1" value=1 checked>
+                    <label class="form-check-label" for="published_1">
+                        Publish
+                    </label>
+                </div>
+                <div class="form-check col-3">
+                    <input class="form-check-input" type="radio" name="published" id="published_0" value=0>
+                    <label class="form-check-label" for="published_0">
+                        Save in Drafts
+                    </label>
+                </div>
+                @error('published')
+                <div class="text-danger">{{$message}}</div>
+                @enderror
+            </div>
+        </div>
 
         <button class="btn btn-primary my-4" type="submit">Create</button>
 

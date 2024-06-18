@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BestShootController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DraftController;
 use App\Http\Controllers\Admin\FilterController;
 use App\Http\Controllers\Admin\LeadController;
 use App\Http\Controllers\Admin\PhotoController;
@@ -37,6 +38,8 @@ Route::middleware(['auth', 'verified'])
     Route::get('photos/categories/filter', [FilterController::class, 'category_filter'])->name('photos.categories.filter');
 
     Route::get('photos/title', [SearchPhotoController::class, 'search'])->name('photos.title');
+
+    Route::get('drafts', [DraftController::class, 'index'])->name('drafts');
 
     Route::resource('leads', LeadController::class);
 

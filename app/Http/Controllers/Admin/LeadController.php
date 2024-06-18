@@ -14,7 +14,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::all();
+        $leads = Lead::paginate(12);
         //dd($leads);
 
         return view('admin.leads.index', compact('leads'));

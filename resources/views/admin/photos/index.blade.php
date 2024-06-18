@@ -32,7 +32,7 @@
         </div>
 
         @forelse($photos as $photo)
-        <div class="card px-0 m-4 w-29  d-flex justify-content-end">
+        <div class="card px-0 m-4 w-29 d-flex justify-content-end">
             <a href="{{route('admin.photos.show', $photo)}}" class="overflow-hidden card-img-top position-relative">
                 @if (Str::startsWith($photo->image, 'https://'))
                 <img src="https://picsum.photos/seed/picsum/300/200" class="w-100 position-absolute bottom-0" alt="">

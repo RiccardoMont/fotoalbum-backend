@@ -40,32 +40,5 @@
         color: var(--text-white);
     }
 
-    .navbar {
-        font-size: 16px;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .pages {
-        width: calc((100%/12)*9);
-        margin-left: -1rem;
-    }
-
-    .user {
-        width: calc((100%/12)*3);
-        margin-right: -1rem;
-    }
-
-    li {
-        cursor: pointer;
-        margin: 0.5rem 1rem;
-
-    }
-
-    li:hover {
-        box-shadow: 0px 2px 0px 0px var(--button-mag);
-    }
+    
 </style>

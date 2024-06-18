@@ -13,7 +13,7 @@ class SearchPhotoController extends Controller
 
         if($request->has('title')){
 
-            $photos = Photo::orderByDesc('id')->where('title', 'LIKE', '%' . $request->title . '%')->get();
+            $photos = Photo::orderByDesc('id')->where('title', 'LIKE', '%' . $request->title . '%')->where('published', '=', true)->paginate(12);
 
             session()->flash('photos', $photos);
         }
