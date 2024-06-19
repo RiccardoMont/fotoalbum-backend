@@ -24,7 +24,7 @@ class PhotoController extends Controller
     {        
 
         //Aggiungo la session per poter ricevere i dati dal FilterController
-        $photos = session('photos', Photo::orderByDesc('id')->where('published', '=', true)->paginate(12));
+        $photos = session('photos', Photo::orderByDesc('id')->where('published', '=', true)->get());
 
         //Aggiungo la session per tenere memorizzati i checkbox dopo la ricerca 
         $checks = session('checks', []);

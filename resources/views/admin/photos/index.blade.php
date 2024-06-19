@@ -81,20 +81,23 @@
 
         @endforelse
     </div>
+
+   
+
+
 </div>
 @endsection
 
 <style type="text/css">
+    .filter {
+        padding: 4px 8px;
+        border-radius: 9px;
+        border: 0;
+    }
 
-   .filter{
-    padding: 4px 8px ;
-    border-radius: 9px;
-    border: 0;
-   }
-
-   .filter:hover{
-    opacity: 0.6;
-   }
+    .filter:hover {
+        opacity: 0.6;
+    }
 
 
     .category-button {
@@ -129,4 +132,5 @@
         width: 100%;
 
     }
+
 </style>

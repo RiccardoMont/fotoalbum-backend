@@ -23,6 +23,8 @@
                     @endif
                 </ul>
             </div>
+            @guest
+            @else
             <div class="searchbar col-md-3">
                 <form action="{{route('admin.photos.title')}}" method="get">
                     @csrf
@@ -34,6 +36,7 @@
                     </div>
                 </form>
             </div>
+            @endguest
             <div class="user d-flex justify-content-end ms-auto col-md-3">
                 <ul class="list-unstyled d-flex m-0">
                     @guest
