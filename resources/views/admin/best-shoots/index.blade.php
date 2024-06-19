@@ -12,13 +12,13 @@
     <div class="row gap-1">
         @forelse($best_shoots as $best)
         @forelse($best->photos as $photo)
-        <div class="card">
+        <a href="{{route('admin.photos.show', $photo)}}" class="card">
             <div class="mask d-flex align-items-center">
                 <img src="{{asset('storage/' . $photo->image)}}" alt="">
                 <div class="badge">{{$best->title}}</div>
             </div>
             <h1>{{$photo->title}}</h1>
-        </div>
+        </a>
         @empty
         @endforelse
         @empty

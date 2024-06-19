@@ -57,7 +57,7 @@ body {
     width: 29%;
 }
 
-//TITLE
+//  
 .title {
 
     & span {
@@ -203,4 +203,17 @@ select:focus {
         border-color: var(--button-hover-purple);
     }
 
+}
+
+//MODALS 
+.modal-content {
+    background-color: var(--bg-softblue) !important;
+
+    & .delete-btn {
+        background-color: var(--button-delete) !important;
+    }
+
+    & .delete-btn:hover {
+        opacity: 0.6;
+    }
 }
