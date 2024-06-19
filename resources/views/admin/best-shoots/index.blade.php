@@ -9,10 +9,10 @@
 </div>
 @include('partials.session-message')
 <div class="container">
-    <div class="row gap-1">
+    <div class="row gap-5 px-4">
         @forelse($best_shoots as $best)
         @forelse($best->photos as $photo)
-        <a href="{{route('admin.photos.show', $photo)}}" class="card">
+        <a href="{{route('admin.photos.show', $photo)}}" class="card col-xs-12 col-sm-12 col-lg-5">
             <div class="mask d-flex align-items-center">
                 <img src="{{asset('storage/' . $photo->image)}}" alt="">
                 <div class="badge">{{$best->title}}</div>
@@ -25,9 +25,9 @@
         <p>no results</p>
         @endforelse
     </div>
-    <div class="row gap-1">
+    <div class="row gap-5 px-4">
         @forelse($highlighted->photos as $photo)
-        <div class="card">
+        <div class="card col-xs-12 col-sm-12 col-lg-5">
             <div class="mask d-flex align-items-center">
                 <img src="{{asset('storage/' . $photo->image)}}" alt="">
                 <div class="badge">{{$highlighted->title}}</div>
@@ -44,7 +44,7 @@
 <style type="text/css">
     .card {
         background-color: var(--bg-blue) !important;
-        width: 49% !important;
+        
 
         & .mask {
             height: 300px;
