@@ -64,3 +64,19 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## Project explanation
+
+This project allow to a photographer to add, edit, delete photos with descriptions and tags.
+All the CRUD operation are possible on the following models: Photo, Category, BestShoot, Lead.
+Each model has its own Controller and routes. Relations are specified into it also.
+Database tables are migrated following these relations and have been populated with Faker initially.
+Api controllers and api routes have been defined to allow api calls from the Vue application.
+To access the app an authentication package has been added (laravel-breeze).
+To allow an easier bootstrap implementation pacificdev/laravel_9_preset has been added.
+To save a lighter version of the uploaded photo image-intervention package has been added.
+
+
+
